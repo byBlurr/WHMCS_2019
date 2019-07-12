@@ -91,6 +91,13 @@ namespace WHMCS
             [StringValue("skipvalidation")] SkipValidation
         }
 
+        public enum AddClientNoteParams
+        {
+            [StringValue("userid")] ClientId,
+            [StringValue("notes")] Notes,
+            [StringValue("sticky")] Sticky,
+        }
+
         public enum DomainWhoisParams
         {
             [StringValue("domain")] Domain
@@ -266,6 +273,7 @@ namespace WHMCS
             [StringValue("AddBillableItem")] AddBillableItem,
             [StringValue("AddCancelRequest")] AddCancelRequest,
             [StringValue("AddClient")] AddClient,
+            [StringValue("AddClientNote")] AddClientNote,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,
             [StringValue("GetClientsDetails")] GetClientsDetails,

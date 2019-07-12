@@ -258,6 +258,32 @@ namespace WHMCS
         }
 
         /// <summary>
+        /// Adds a Client Note.
+        /// </summary>
+        /// <param name="ClientId">The Client ID to apply the note to</param>
+        /// <param name="Notes">The note to add</param>
+        /// <param name="Sticky">Should the note be made sticky. Makes the note ‘sticky’ and displays the note throughout the client’s account and on any tickets they submit in the admin area</param>
+        /// <returns>The id of the newly created note</returns>
+        public int AddClientNote(int ClientId, string Notes, bool Sticky = false)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddClientNote.ToString() },
+                { EnumUtil.GetString(APIEnums.AddClientNoteParams.ClientId), ClientId.ToString() },
+                { EnumUtil.GetString(APIEnums.AddClientNoteParams.Notes), Notes.ToString() },
+                { EnumUtil.GetString(APIEnums.AddClientNoteParams.Sticky), Sticky.ToString() },
+            };
+
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return Convert.ToInt32(result["noteid"]);
+            else
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
+
+        /// <summary>
         /// Retrieve domain whois information.
         /// </summary>
         /// <param name="Domain">The domain name to lookup</param>
