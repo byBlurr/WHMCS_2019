@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace WHMCS.Orders
+namespace WHMCS.Orders.GetInvoices
 {
     public class Invoice
     {

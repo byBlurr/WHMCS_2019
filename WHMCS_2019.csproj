@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<PackageId>WHMCS_2019</PackageId>
-	<Version>0.1.1</Version>
-	<Authors>Daniel Dumont</Authors>
-	<Company>blurrdev</Company>
+	  <PackageId>WHMCS_2019</PackageId>
+	  <Version>0.1.1</Version>
+	  <Authors>Daniel Dumont</Authors>
+	  <Company>blurrdev</Company>
+    <Description>WHMCS API wrapper for C#.</Description>
+    <Tags>whmcs</Tags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\" />
     <Folder Include="Login\" />
     <Folder Include="Orders\" />
+    <Folder Include="Clients\" />
   </ItemGroup>
 
 </Project>

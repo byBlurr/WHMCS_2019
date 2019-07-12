@@ -584,7 +584,7 @@ namespace WHMCS
         /// <param name="UserID">Find invoices for a specific client id</param>
         /// <param name="Status">Find invoices for a specific status. Standard Invoice statuses plus Overdue</param>
         /// <returns>ClientsInvoices Object</returns>
-        public ClientsInvoices GetInvoices(int LimitStart = 0, int LimitNumber = 25, int UserID = -1, string Status = "")
+        public Orders.GetInvoices.ClientsInvoices GetInvoices(int LimitStart = 0, int LimitNumber = 25, int UserID = -1, string Status = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -597,7 +597,7 @@ namespace WHMCS
             if (Status != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetInvoicesParams.Status), Status);
 
-            return JsonConvert.DeserializeObject<ClientsInvoices>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<Orders.GetInvoices.ClientsInvoices>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
@@ -634,7 +634,7 @@ namespace WHMCS
         /// <param name="ClientID">Find transactions for a specific client id</param>
         /// <param name="TransactionID">Find transactions for a specific transaction id</param>
         /// <returns>ClientsTransactions Object</returns>
-        public ClientsTransactions GetTransactions(int InvoiceID = -1, int ClientID = -1, string TransactionID = "")
+        public Orders.GetTransactions.ClientsTransactions GetTransactions(int InvoiceID = -1, int ClientID = -1, string TransactionID = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -647,7 +647,7 @@ namespace WHMCS
             if (TransactionID != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetTransactionsParams.TransactionID), TransactionID);
 
-            return JsonConvert.DeserializeObject<ClientsTransactions>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<Orders.GetTransactions.ClientsTransactions>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
