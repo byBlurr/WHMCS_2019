@@ -310,7 +310,31 @@ namespace WHMCS
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
 
-        // AddCredit
+        /// <summary>
+        /// Adds credit to a given client.
+        /// </summary>
+        /// <param name="ClientId">Client you are adding credit to</param>
+        /// <param name="Description">Admin only notes for credit justification</param>
+        /// <param name="Amount">Amount of credit to add</param>
+        /// <returns>The new total credit balance</returns>
+        public double AddCredit(int ClientId, string Description, float Amount)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddCredit.ToString() },
+                { EnumUtil.GetString(APIEnums.AddCreditParams.ClientId), ClientId.ToString() },
+                { EnumUtil.GetString(APIEnums.AddCreditParams.Description), Description.ToString() },
+                { EnumUtil.GetString(APIEnums.AddCreditParams.Amount), Amount.ToString() }
+            };
+
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return Convert.ToDouble(result["newbalance"]);
+            else
+                throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
+        }
 
         // AddInvoicePayment
 

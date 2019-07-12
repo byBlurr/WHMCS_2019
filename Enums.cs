@@ -121,6 +121,13 @@ namespace WHMCS
             [StringValue("permissions")] Permissions,
         }
 
+        public enum AddCreditParams
+        {
+            [StringValue("clientid")] ClientId,
+            [StringValue("description")] Description,
+            [StringValue("amount")] Amount,
+        }
+
         public enum DomainWhoisParams
         {
             [StringValue("domain")] Domain
@@ -298,6 +305,7 @@ namespace WHMCS
             [StringValue("AddClient")] AddClient,
             [StringValue("AddClientNote")] AddClientNote,
             [StringValue("AddContact")] AddContact,
+            [StringValue("AddCredit")] AddCredit,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,
             [StringValue("GetClientsDetails")] GetClientsDetails,
