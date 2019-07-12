@@ -294,7 +294,8 @@ namespace WHMCS
         {
             NameValueCollection data = new NameValueCollection()
             {
-                { "action", APIEnums.Actions.AddContact.ToString() }
+                { "action", APIEnums.Actions.AddContact.ToString() },
+                { EnumUtil.GetString(APIEnums.AddContactParams.ClientId), ClientId.ToString() },
             };
             
             foreach (string key in Contact.ContactInfo)
@@ -371,7 +372,35 @@ namespace WHMCS
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
         }
 
-        // AddOrder
+        /// <summary>
+        /// Adds an order to a client.
+        /// </summary>
+        /// <param name="ClientId">ClientId to add the order to</param>
+        /// <param name="Order">The order to add</param>
+        /// <returns>OrderIds</returns>
+        public OrderIds AddOrder(int ClientId, NewOrder Order)
+        {
+            throw new NotImplementedException(); // TODO: Remove this
+
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddOrder.ToString() },
+                { EnumUtil.GetString(APIEnums.AddOrderParams.ClientId), ClientId.ToString() },
+            };
+
+            foreach (string key in Order.OrderDetails)
+            {
+                data.Add(key, Order.OrderDetails[key]);
+            }
+
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return JsonConvert.DeserializeObject<OrderIds>(req, settings);
+            else
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
 
         // AddProduct
 

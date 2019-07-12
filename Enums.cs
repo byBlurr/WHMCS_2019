@@ -100,6 +100,7 @@ namespace WHMCS
 
         public enum AddContactParams
         {
+            [StringValue("clientid")] ClientId,
             [StringValue("firstname")] FirstName,
             [StringValue("lastname")] LastName,
             [StringValue("companyname")] CompanyName,
@@ -137,6 +138,50 @@ namespace WHMCS
             [StringValue("amount")] Amount,
             [StringValue("fees")] Fees,
             [StringValue("noemail")] NoEmail,
+        }
+
+        public enum AddOrderParams
+        {
+            [StringValue("clientid")] ClientId,
+            [StringValue("paymentmethod")] PaymentMethod,
+            [StringValue("pid")] ProductIds,
+            [StringValue("domain")] Domains,
+            [StringValue("billingcycle")] BillingCycles,
+            [StringValue("domaintype")] DomainTypes,
+            [StringValue("regperiod")] RegistrationPeriods,
+            [StringValue("eppcode")] EppCodes,
+            [StringValue("nameserver1")] Nameserver1,
+            [StringValue("nameserver2")] Nameserver2,
+            [StringValue("nameserver3")] Nameserver3,
+            [StringValue("nameserver4")] Nameserver4,
+            [StringValue("nameserver5")] Nameserver5,
+            [StringValue("customfields")] CustomFields,
+            [StringValue("configoptions")] ConfigOptions,
+            [StringValue("priceoverride")] PriceOverride,
+            [StringValue("promocode")] PromoCode,
+            [StringValue("promooverride")] PromoOverride,
+            [StringValue("affid")] AffiliateId,
+            [StringValue("noinvoice")] NoInvoice,
+            [StringValue("noinvoiceemail")] NoInvoiceEmail,
+            [StringValue("noemail")] NoEmail,
+            [StringValue("addons")] Addons,
+            [StringValue("hostname")] Hostnames,
+            [StringValue("ns1prefix")] NS1Prefixes,
+            [StringValue("ns2prefix")] NS2Prefixes,
+            [StringValue("rootpw")] RootPasswords,
+            [StringValue("contactid")] ContactId,
+            [StringValue("dnsmanagement")] DNSManagement,
+            [StringValue("domainfields")] DomainFields,
+            [StringValue("emailforwarding")] EmailForwarding,
+            [StringValue("idprotection")] IDProtection,
+            [StringValue("domainpriceoverride")] DomainPriceOverride,
+            [StringValue("domainrenewoverride")] DomainRenewOverride,
+            [StringValue("domainrenewals")] DomainRenewals,
+            [StringValue("clientip")] ClientIp,
+            [StringValue("addonid")] AddonId,
+            [StringValue("serviceid")] SerivceId,
+            [StringValue("addonids")] AddonIds,
+            [StringValue("serviceids")] ServiceIds,
         }
 
         public enum DomainWhoisParams
@@ -318,6 +363,7 @@ namespace WHMCS
             [StringValue("AddContact")] AddContact,
             [StringValue("AddCredit")] AddCredit,
             [StringValue("AddInvoicePayment")] AddInvoicePayment,
+            [StringValue("AddOrder")] AddOrder,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,
             [StringValue("GetClientsDetails")] GetClientsDetails,
