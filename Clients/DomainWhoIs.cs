@@ -4,7 +4,6 @@ namespace WHMCS.Clients
 {
     public class DomainWhoIs
     {
-
         [JsonProperty("result")]
         public string Result { get; set; }
 

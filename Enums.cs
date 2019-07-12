@@ -52,6 +52,13 @@ namespace WHMCS
             [StringValue("hours")] Quantity,
         }
 
+        public enum AddCancelRequestParams
+        {
+            [StringValue("serviceid")] ServiceId,
+            [StringValue("type")] Type,
+            [StringValue("reason")] Reason,
+        }
+
         public enum AddClientParams
         {
             [StringValue("firstname")] Firstname,
@@ -257,6 +264,7 @@ namespace WHMCS
             [StringValue("AddAnnouncement")] AddAnnouncement,
             [StringValue("AddBannedIp")] AddBannedIp,
             [StringValue("AddBillableItem")] AddBillableItem,
+            [StringValue("AddCancelRequest")] AddCancelRequest,
             [StringValue("AddClient")] AddClient,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,

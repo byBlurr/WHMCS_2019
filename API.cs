@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using WHMCS.Clients;
 using WHMCS.Login;
 using WHMCS.Orders;
+using WHMCS_2019.Orders;
 
 namespace WHMCS
 {
@@ -198,6 +199,28 @@ namespace WHMCS
                 return Convert.ToInt32(result["billableid"]);
             else
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
+        }
+
+        public CancelRequestResponse AddCancelRequest(int ServiceId, string Type = "", string Reason = "")
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddCancelRequest.ToString() },
+                { EnumUtil.GetString(APIEnums.AddCancelRequestParams.ServiceId), ServiceId.ToString() },
+            };
+
+            if (Type != "")
+                data.Add(EnumUtil.GetString(APIEnums.AddCancelRequestParams.Type), Type.ToString());
+            if (Reason != "")
+                data.Add(EnumUtil.GetString(APIEnums.AddCancelRequestParams.Reason), Reason.ToString());
+
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return JsonConvert.DeserializeObject<CancelRequestResponse>(req, settings);
+            else
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
 
         /// <summary>
