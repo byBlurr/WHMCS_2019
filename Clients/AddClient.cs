@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 
-namespace WHMCS
+namespace WHMCS.Clients
 {
     /// <summary>
     /// Params info @ https://developers.whmcs.com/api-reference/addclient/

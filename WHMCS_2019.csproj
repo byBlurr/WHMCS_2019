@@ -12,4 +12,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Clients\" />
+    <Folder Include="Login\" />
+    <Folder Include="Orders\" />
+  </ItemGroup>
+
 </Project>
