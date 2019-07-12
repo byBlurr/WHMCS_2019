@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Specialized;
-using Newtonsoft.Json;
 
-namespace WHMCS_API.UpdateClientProduct
+namespace WHMCS.Clients
 {
-	public class UpdateClientProduct
+    public class UpdateClientProduct
 	{
 		public readonly NameValueCollection nvm;
 		public UpdateClientProduct(int ServiceID, int PackageID = -1, int ServerID = -1, DateTime NextDueDate = default(DateTime),

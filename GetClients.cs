@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace WHMCS_API.GetClients
+namespace WHMCS.Clients
 {
     public class Clients
     {
         [JsonProperty("client")]
-        public IList<GetClientsDetails.Client> Client { get; set; }
+        public IList<Clients.Client> Client { get; set; }
     }
 
     public class ClientsInfo

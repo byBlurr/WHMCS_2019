@@ -4,7 +4,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace WHMCS_API
+namespace WHMCS
 {
     public class Call
     {

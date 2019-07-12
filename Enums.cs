@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace WHMCS_API
+namespace WHMCS
 {
     public static class APIEnums  
     {

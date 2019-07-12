@@ -1,5 +1,4 @@
-﻿using System;
-namespace WHMCS_API
+﻿namespace WHMCS
 {
 	public static class Helper
 	{
