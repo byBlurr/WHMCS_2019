@@ -380,8 +380,6 @@ namespace WHMCS
         /// <returns>OrderIds</returns>
         public OrderIds AddOrder(int ClientId, NewOrder Order)
         {
-            throw new NotImplementedException(); // TODO: Remove this
-
             NameValueCollection data = new NameValueCollection()
             {
                 { "action", APIEnums.Actions.AddOrder.ToString() },
