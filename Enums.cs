@@ -39,6 +39,19 @@ namespace WHMCS
             [StringValue("expires")] Expires
         }
 
+        public enum AddBillableItemParams
+        {
+            [StringValue("clientid")] ClientId,
+            [StringValue("description")] Description,
+            [StringValue("amount")] InvoiceAmount,
+            [StringValue("invoiceaction")] InvoiceAction,
+            [StringValue("recur")] Recur,
+            [StringValue("recurcycle")] RecurCycle,
+            [StringValue("recurfor")] RecurFor,
+            [StringValue("duedate")] DueDate,
+            [StringValue("hours")] Quantity,
+        }
+
         public enum AddClientParams
         {
             [StringValue("firstname")] Firstname,
@@ -243,6 +256,7 @@ namespace WHMCS
             [StringValue("AcceptQuote")] AcceptQuote,
             [StringValue("AddAnnouncement")] AddAnnouncement,
             [StringValue("AddBannedIp")] AddBannedIp,
+            [StringValue("AddBillableItem")] AddBillableItem,
             [StringValue("AddClient")] AddClient,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,

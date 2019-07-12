@@ -26,7 +26,7 @@ namespace WHMCS
         // Actions
 
         /// <summary>
-        /// Accepts a pending order. \n https://github.com/byBlurr/WHMCS_2019/wiki/AcceptOrder%28%29
+        /// Accepts a pending order.
         /// </summary>
         /// <param name="OrderId">The order id to be accepted</param>
         /// <param name="ServerId">The specific server to assign to products within the order</param>
@@ -141,6 +141,51 @@ namespace WHMCS
             JObject result = JObject.Parse(req);
             if (result["result"].ToString() == "success")
                 return Convert.ToInt32(result["banid"]);
+            else
+                throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
+        }
+
+        /// <summary>
+        /// Adds a Billable Item to a client.
+        /// </summary>
+        /// <param name="ClientId">The client to add the item to</param>
+        /// <param name="Description">The description of the Billable Item. This will appear on the invoice</param>
+        /// <param name="InvoiceAmount">the total amount to invoice for</param>
+        /// <param name="InvoiceAction">One of ‘noinvoice’, ‘nextcron’, ‘nextinvoice’, ‘duedate’, ‘recur’</param>
+        /// <param name="Recur">When $invoiceaction=recur. The frequency of the recurrence.</param>
+        /// <param name="RecurCycle">How often to recur the Billable Item. Days, Weeks, Months or Years.</param>
+        /// <param name="RecurFor">How many times the Billable Item should create an invoice.</param>
+        /// <param name="DueDate">Date the invoice should be due (only required for duedate & recur invoice actions). YYYY-mm-dd</param>
+        /// <param name="Quantity">number of hours/quantity the item corresponds to. (not required for single quantities)</param>
+        /// <returns>Returns the new billable item id int</returns>
+        public int AddBillableItem(int ClientId, string Description, float InvoiceAmount, string InvoiceAction = "", int Recur = -1, string RecurCycle = "", int RecurFor = -1, string DueDate = "", float Quantity = -1.0f)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddBillableItem.ToString() },
+                { EnumUtil.GetString(APIEnums.AddBillableItemParams.ClientId), ClientId.ToString() },
+                { EnumUtil.GetString(APIEnums.AddBillableItemParams.Description), Description.ToString() },
+                { EnumUtil.GetString(APIEnums.AddBillableItemParams.InvoiceAmount), InvoiceAmount.ToString() }
+            };
+
+            if (InvoiceAction != "")
+                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.InvoiceAction), InvoiceAction.ToString());
+            if (Recur != -1)
+                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.Recur), Recur.ToString());
+            if (RecurCycle != "")
+                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.RecurCycle), RecurCycle.ToString());
+            if (RecurFor != -1)
+                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.RecurFor), RecurFor.ToString());
+            if (DueDate != "")
+                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.DueDate), DueDate.ToString());
+            if (Quantity != -1)
+                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.Quantity), Quantity.ToString());
+
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return Convert.ToInt32(result["billableid"]);
             else
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
         }
