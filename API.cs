@@ -739,5 +739,21 @@ namespace WHMCS
             else
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
+
+        /// <summary>
+        /// This is not recommended. Read the API Wrapper wiki page ()
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public JObject UnsupportedAction(NameValueCollection data)
+        {
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return result;
+            else
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
     }
 }
