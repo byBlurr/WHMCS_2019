@@ -128,6 +128,17 @@ namespace WHMCS
             [StringValue("amount")] Amount,
         }
 
+        public enum AddInvoicePaymentParams
+        {
+            [StringValue("invoiceid")] InvoiceId,
+            [StringValue("transid")] TransactionId,
+            [StringValue("gateway")] Gateway,
+            [StringValue("date")] DateTime,
+            [StringValue("amount")] Amount,
+            [StringValue("fees")] Fees,
+            [StringValue("noemail")] NoEmail,
+        }
+
         public enum DomainWhoisParams
         {
             [StringValue("domain")] Domain
@@ -306,6 +317,7 @@ namespace WHMCS
             [StringValue("AddClientNote")] AddClientNote,
             [StringValue("AddContact")] AddContact,
             [StringValue("AddCredit")] AddCredit,
+            [StringValue("AddInvoicePayment")] AddInvoicePayment,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,
             [StringValue("GetClientsDetails")] GetClientsDetails,

@@ -336,7 +336,40 @@ namespace WHMCS
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
         }
 
-        // AddInvoicePayment
+        /// <summary>
+        /// Adds payment to a given invoice.
+        /// </summary>
+        /// <param name="InvoiceId"></param>
+        /// <param name="TransactionId">The unique transaction id that should be applied to the payment</param>
+        /// <param name="Gateway">The gateway used in system name format, eg. paypal, authorize</param>
+        /// <param name="DateTime">The date that the payment should have assigned. Format: YYYY-MM-DD HH:mm:ss</param>
+        /// <param name="Amount">The amount paid, can be left undefined to take full amount of invoice</param>
+        /// <param name="Fees">The amount of the payment that was taken as a fee by the gateway</param>
+        /// <param name="NoEmail">Set to true to not send an email for the invoice payment</param>
+        /// <returns>Returns true if successful</returns>
+        public bool AddInvoicePayment(int InvoiceId, string TransactionId, string Gateway, string DateTime = "", float Amount = 0f, float Fees = 0f, bool NoEmail = false)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddInvoicePayment.ToString() },
+                { EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.InvoiceId), InvoiceId.ToString() },
+                { EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.TransactionId), TransactionId.ToString() },
+                { EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.Gateway), Gateway.ToString() },
+                { EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.NoEmail), NoEmail.ToString() },
+            };
+
+            if (DateTime != "") data.Add(EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.DateTime), DateTime.ToString());
+            if (Amount != 0f) data.Add(EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.Amount), Amount.ToString());
+            if (Fees != 0f) data.Add(EnumUtil.GetString(APIEnums.AddInvoicePaymentParams.Fees), Fees.ToString());
+
+            string req = _call.MakeCall(data);
+            JObject result = JObject.Parse(req);
+
+            if (result["result"].ToString() == "success")
+                return true;
+            else
+                throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
+        }
 
         // AddOrder
 
