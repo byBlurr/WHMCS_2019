@@ -98,6 +98,29 @@ namespace WHMCS
             [StringValue("sticky")] Sticky,
         }
 
+        public enum AddContactParams
+        {
+            [StringValue("firstname")] FirstName,
+            [StringValue("lastname")] LastName,
+            [StringValue("companyname")] CompanyName,
+            [StringValue("email")] Email,
+            [StringValue("address1")] Address1,
+            [StringValue("address2")] Address2,
+            [StringValue("city")] City,
+            [StringValue("state")] State,
+            [StringValue("postcode")] Postcode,
+            [StringValue("country")] Country,
+            [StringValue("phonenumber")] PhoneNumber,
+            [StringValue("tax_id")] TaxId,
+            [StringValue("password2")] Password2,
+            [StringValue("generalemails")] GeneralEmails,
+            [StringValue("productemails")] ProductEmails,
+            [StringValue("domainemails")] DomainEmails,
+            [StringValue("invoiceemails")] InvoiceEmails,
+            [StringValue("supportemails")] SupportEmails,
+            [StringValue("permissions")] Permissions,
+        }
+
         public enum DomainWhoisParams
         {
             [StringValue("domain")] Domain
@@ -274,6 +297,7 @@ namespace WHMCS
             [StringValue("AddCancelRequest")] AddCancelRequest,
             [StringValue("AddClient")] AddClient,
             [StringValue("AddClientNote")] AddClientNote,
+            [StringValue("AddContact")] AddContact,
             [StringValue("DomainWhois")] DomainWhois,
             [StringValue("GetClients")] GetClients,
             [StringValue("GetClientsDetails")] GetClientsDetails,

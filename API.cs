@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using WHMCS.Clients;
 using WHMCS.Login;
 using WHMCS.Orders;
+using WHMCS_2019.Clients;
 using WHMCS_2019.Orders;
 
 namespace WHMCS
@@ -282,6 +283,40 @@ namespace WHMCS
             else
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
+
+        /// <summary>
+        /// Adds a contact to a client account.
+        /// </summary>
+        /// <param name="ClientId">The ClientID the information is being added to</param>
+        /// <param name="Contact">The contact information to add</param>
+        /// <returns>The id of the newly added contact.</returns>
+        public int AddContact(int ClientId, Contact Contact)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", APIEnums.Actions.AddContact.ToString() }
+            };
+            
+            foreach (string key in Contact.ContactInfo)
+            {
+                data.Add(key, Contact.ContactInfo[key]);
+            }
+
+            JObject result = JObject.Parse(_call.MakeCall(data));
+
+            if (result["result"].ToString() == "success")
+                return Convert.ToInt32(result["contactid"]);
+            else
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
+
+        // AddCredit
+
+        // AddInvoicePayment
+
+        // AddOrder
+
+        // AddProduct
 
         /// <summary>
         /// Retrieve domain whois information.
