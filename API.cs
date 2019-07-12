@@ -169,11 +169,21 @@ namespace WHMCS
             };
 
             if (InvoiceAction != "")
-                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.InvoiceAction), InvoiceAction.ToString());
+            {
+                if (InvoiceAction == "noinvoice" || InvoiceAction == "nextcron" || InvoiceAction == "nextinvoice" || InvoiceAction == "duedate" || InvoiceAction == "recur")
+                    data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.InvoiceAction), InvoiceAction.ToString());
+                else
+                    throw new Exception("An API Error occurred", new Exception("InvoiceAction must be one of ‘noinvoice’, ‘nextcron’, ‘nextinvoice’, ‘duedate’ or ‘recur’."));
+            }
             if (Recur != -1)
                 data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.Recur), Recur.ToString());
             if (RecurCycle != "")
-                data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.RecurCycle), RecurCycle.ToString());
+            {
+                if (RecurCycle.ToLower() == "days" || RecurCycle.ToLower() == "weeks" || RecurCycle.ToLower() == "months" || RecurCycle.ToLower() == "years")
+                    data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.RecurCycle), RecurCycle.ToString());
+                else
+                    throw new Exception("An API Error occurred", new Exception("RecurCycle must be one of ‘Days’, ‘Weeks’, ‘Months’ or ‘Years’."));
+            }
             if (RecurFor != -1)
                 data.Add(EnumUtil.GetString(APIEnums.AddBillableItemParams.RecurFor), RecurFor.ToString());
             if (DueDate != "")
