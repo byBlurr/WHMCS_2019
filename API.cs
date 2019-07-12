@@ -2,6 +2,9 @@
 using System.Collections.Specialized;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WHMCS.Clients;
+using WHMCS.Login;
+using WHMCS.Orders;
 
 namespace WHMCS
 {
@@ -200,7 +203,7 @@ namespace WHMCS
         /// <param name="Sorting">The direction to sort the results. ASC or DESC. Default: ASC</param>
         /// <param name="Search">The search term to look for at the start of email, firstname, lastname, fullname or companyname</param>
         /// <returns>ClientsInfo Object</returns>
-        public Clients.ClientsInfo GetClients(int LimitStart = 0, int LimitNum = 25, string Sorting = "ASC", string Search = "")
+        public ClientsInfo GetClients(int LimitStart = 0, int LimitNum = 25, string Sorting = "ASC", string Search = "")
         {
             if (!Sorting.Equals("ASC") && !Sorting.Equals("DESC"))
                 throw new Exception("Sorting parameter must be 'ASC' or 'DESC'");
@@ -220,7 +223,7 @@ namespace WHMCS
             string req = _call.MakeCall(data);
             JObject result = JObject.Parse(req);
             if (result["result"].ToString() == "success")
-                return JsonConvert.DeserializeObject<Clients.ClientsInfo>(req, settings);
+                return JsonConvert.DeserializeObject<ClientsInfo>(req, settings);
             else
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
         }
@@ -232,7 +235,7 @@ namespace WHMCS
         /// <param name="ClientEmail">The email address of the client to search for</param>
         /// <param name="Stats">Also return additional client statistics</param>
         /// <returns>ClientsDetails Object</returns>
-        public Clients.ClientsDetails GetClientsDetails(int ClientID = -1, string ClientEmail = "", bool Stats = false)
+        public ClientsDetails GetClientsDetails(int ClientID = -1, string ClientEmail = "", bool Stats = false)
         {
             if (ClientID == -1 && ClientEmail == "")
                 throw new Exception("ClientID or ClientEmail needed");
@@ -250,7 +253,7 @@ namespace WHMCS
             string req = _call.MakeCall(data);
             JObject result = JObject.Parse(req);
             if (result["result"].ToString() == "success")
-                return JsonConvert.DeserializeObject<Clients.ClientsDetails>(req, settings);
+                return JsonConvert.DeserializeObject<ClientsDetails>(req, settings);
             else
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
         }
@@ -264,7 +267,7 @@ namespace WHMCS
         /// <param name="DomainID">The specific domain id to obtain the details for</param>
         /// <param name="Domain">The specific domain to obtain the details for</param>
         /// <returns>ClientsDomains Object</returns>
-        public Clients.ClientsDomains GetClientsDomains(int LimitStart = 0, int LimitNumber = 25, int ClientID = -1, int DomainID = -1, string Domain = "")
+        public ClientsDomains GetClientsDomains(int LimitStart = 0, int LimitNumber = 25, int ClientID = -1, int DomainID = -1, string Domain = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -280,7 +283,7 @@ namespace WHMCS
             if (Domain != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetClientsDomainsParams.Domain), Domain);
 
-            return JsonConvert.DeserializeObject<Clients.ClientsDomains>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<ClientsDomains>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
@@ -294,7 +297,7 @@ namespace WHMCS
         /// <param name="Domain">The specific domain to obtain the service details for</param>
         /// <param name="Username">The specific username to obtain the details for</param>
         /// <returns>ClientsProducts Object</returns>
-        public Clients.ClientsProducts GetClientsProducts(int LimitStart = 0, int LimitNum = 25, int ClientID = -1, int ServiceID = -1, int ProductID = -1, string Domain = "", string Username = "")
+        public ClientsProducts GetClientsProducts(int LimitStart = 0, int LimitNum = 25, int ClientID = -1, int ServiceID = -1, int ProductID = -1, string Domain = "", string Username = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -314,7 +317,7 @@ namespace WHMCS
             if (Username != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetClientsProductsParams.Username), Username);
 
-            return JsonConvert.DeserializeObject<Clients.ClientsProducts>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<ClientsProducts>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
@@ -322,7 +325,7 @@ namespace WHMCS
         /// </summary>
         /// <param name="InvoiceID">The ID of the invoice to retrieve</param>
         /// <returns>Invoice Object</returns>
-        public Invoices.Invoice GetInvoice(int InvoiceID)
+        public Invoice GetInvoice(int InvoiceID)
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -335,7 +338,7 @@ namespace WHMCS
             JObject result = JObject.Parse(req);
 
             if (result["result"].ToString() == "success")
-                return JsonConvert.DeserializeObject<Invoices.Invoice>(req, settings);
+                return JsonConvert.DeserializeObject<Invoice>(req, settings);
             else
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
 
@@ -349,7 +352,7 @@ namespace WHMCS
         /// <param name="UserID">Find invoices for a specific client id</param>
         /// <param name="Status">Find invoices for a specific status. Standard Invoice statuses plus Overdue</param>
         /// <returns>ClientsInvoices Object</returns>
-        public Invoices.ClientsInvoices GetInvoices(int LimitStart = 0, int LimitNumber = 25, int UserID = -1, string Status = "")
+        public ClientsInvoices GetInvoices(int LimitStart = 0, int LimitNumber = 25, int UserID = -1, string Status = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -362,7 +365,7 @@ namespace WHMCS
             if (Status != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetInvoicesParams.Status), Status);
 
-            return JsonConvert.DeserializeObject<Invoices.ClientsInvoices>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<ClientsInvoices>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
@@ -374,7 +377,7 @@ namespace WHMCS
         /// <param name="UserID">Find orders for a specific client id</param>
         /// <param name="Status">Find orders for a specific status</param>
         /// <returns>ClientsOrders Model</returns>
-        public Orders.ClientsOrders GetOrders(int LimitStart = 0, int LimitNumber = 25, int OrderID = -1, int UserID = -1, string Status = "")
+        public ClientsOrders GetOrders(int LimitStart = 0, int LimitNumber = 25, int OrderID = -1, int UserID = -1, string Status = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -389,7 +392,7 @@ namespace WHMCS
             if (Status != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetOrdersParams.Status), Status);
 
-            return JsonConvert.DeserializeObject<Orders.ClientsOrders>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<ClientsOrders>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
@@ -399,7 +402,7 @@ namespace WHMCS
         /// <param name="ClientID">Find transactions for a specific client id</param>
         /// <param name="TransactionID">Find transactions for a specific transaction id</param>
         /// <returns>ClientsTransactions Object</returns>
-        public Orders.ClientsTransactions GetTransactions(int InvoiceID = -1, int ClientID = -1, string TransactionID = "")
+        public ClientsTransactions GetTransactions(int InvoiceID = -1, int ClientID = -1, string TransactionID = "")
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -412,7 +415,7 @@ namespace WHMCS
             if (TransactionID != "")
                 data.Add(EnumUtil.GetString(APIEnums.GetTransactionsParams.TransactionID), TransactionID);
 
-            return JsonConvert.DeserializeObject<Orders.ClientsTransactions>(_call.MakeCall(data), settings);
+            return JsonConvert.DeserializeObject<ClientsTransactions>(_call.MakeCall(data), settings);
         }
 
         /// <summary>
@@ -471,7 +474,7 @@ namespace WHMCS
         /// </summary>
         /// <param name="ClientProductUpdateInfo"></param>
         /// <returns>Returns true if successful</returns>
-		public bool UpdateClientProduct(Clients.UpdateClientProduct ClientProductUpdateInfo)
+		public bool UpdateClientProduct(UpdateClientProduct ClientProductUpdateInfo)
 		{
 
 			JObject result = JObject.Parse(_call.MakeCall(ClientProductUpdateInfo.nvm));
@@ -489,7 +492,7 @@ namespace WHMCS
         /// <param name="Email">Client or Sub-Account Email Address</param>
         /// <param name="Password">Password to validate</param>
         /// <returns>ValidateLogin Object</returns>
-        public Login.LoginDetails ValidateLogin(string Email, string Password)
+        public LoginDetails ValidateLogin(string Email, string Password)
         {
             NameValueCollection data = new NameValueCollection()
             {
@@ -502,7 +505,7 @@ namespace WHMCS
             JObject result = JObject.Parse(req);
 
             if (result["result"].ToString() == "success")
-                return JsonConvert.DeserializeObject<Login.LoginDetails>(req, settings);
+                return JsonConvert.DeserializeObject<LoginDetails>(req, settings);
             else
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }

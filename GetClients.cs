@@ -6,7 +6,7 @@ namespace WHMCS.Clients
     public class Clients
     {
         [JsonProperty("client")]
-        public IList<Clients.Client> Client { get; set; }
+        public IList<Client> Client { get; set; }
     }
 
     public class ClientsInfo
