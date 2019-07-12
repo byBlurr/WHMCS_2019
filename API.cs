@@ -201,6 +201,13 @@ namespace WHMCS
                 throw new Exception("An API Error occurred", new Exception(result["message"].ToString()));
         }
 
+        /// <summary>
+        /// Adds a Cancellation Request.
+        /// </summary>
+        /// <param name="ServiceId">The Service ID to cancel</param>
+        /// <param name="Type">The type of cancellation. ‘Immediate’ or ‘End of Billing Period’</param>
+        /// <param name="Reason">The customer reason for cancellation</param>
+        /// <returns>Object of CancelRequestResponse</returns>
         public CancelRequestResponse AddCancelRequest(int ServiceId, string Type = "", string Reason = "")
         {
             NameValueCollection data = new NameValueCollection()
