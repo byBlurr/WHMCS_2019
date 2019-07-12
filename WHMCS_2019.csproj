@@ -7,7 +7,7 @@
 	  <Authors>Daniel Dumont</Authors>
 	  <Company>blurrdev</Company>
     <Description>WHMCS API wrapper for C#.</Description>
-    <Tags>whmcs</Tags>
+    <PackageTags>whmcs;WHMCS;api;wrapper</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
