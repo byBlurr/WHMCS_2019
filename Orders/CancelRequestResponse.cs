@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WHMCS_2019.Orders
+namespace WHMCS.Orders
 {
     public class CancelRequestResponse
     {

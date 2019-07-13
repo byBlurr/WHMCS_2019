@@ -5,8 +5,6 @@ using Newtonsoft.Json.Linq;
 using WHMCS.Clients;
 using WHMCS.Login;
 using WHMCS.Orders;
-using WHMCS_2019.Clients;
-using WHMCS_2019.Orders;
 
 namespace WHMCS
 {
@@ -400,7 +398,7 @@ namespace WHMCS
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
 
-        // AddProduct
+        // Todo: AddProduct
 
         /// <summary>
         /// Retrieve domain whois information.

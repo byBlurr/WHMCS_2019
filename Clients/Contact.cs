@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Text;
 using WHMCS;
 
-namespace WHMCS_2019.Clients
+namespace WHMCS.Clients
 {
     public class Contact
     {
