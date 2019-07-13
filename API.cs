@@ -695,7 +695,27 @@ namespace WHMCS
             else if (result["result"].ToString() != "success" && getException)
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
             return false;
+        }
 
+        /// <summary>
+        /// Runs a custom module action for a given service.
+        /// </summary>
+        /// <param name="ServiceID">The service ID to run the action for</param>
+        /// <param name="Command">The name of the custom function to run</param>
+        /// <param name="getException"></param>
+        public async Task ModuleCustomCommandAsync(int ServiceID, string Command)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", EnumUtil.GetString(APIEnums.Actions.ModuleCustomCommand) },
+                { EnumUtil.GetString(APIEnums.ModuleCustomCommandParams.ServiceID), ServiceID.ToString() },
+                { EnumUtil.GetString(APIEnums.ModuleCustomCommandParams.Command), Command }
+            };
+
+            JObject result = JObject.Parse(await _call.MakeCallAsync(data));
+
+            if (result["result"].ToString() != "success")
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
 
         /// <summary>
