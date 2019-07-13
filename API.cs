@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WHMCS.Clients;
@@ -713,6 +714,18 @@ namespace WHMCS
 				throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
 
 		}
+
+        /// <summary>
+        /// Updates a Client Service.
+        /// </summary>
+        /// <param name="ClientProductUpdateInfo"></param>
+        public async Task UpdateClientProductAsync(UpdateClientProduct ClientProductUpdateInfo)
+        {
+            JObject result = JObject.Parse(await _call.MakeCallAsync(ClientProductUpdateInfo.nvm));
+
+            if (result["result"].ToString() != "success")
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
 
         /// <summary>
         /// Validate client login credentials. \nThis command can be used to validate an email address and password against a registered user in WHMCS. On success, the userid and password hash will be returned which can be used to create an authenticated session by setting the session key ‘uid’ to the userid and the session key ‘upw’ to the passwordhash. Note: if session IP validation is enabled, this API call must be executed via the local API to receive a valid hash.
