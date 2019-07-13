@@ -667,9 +667,30 @@ namespace WHMCS
 
             if (result["result"].ToString() == "success")
                 return true;
-            else if(result["result"].ToString() != "success" && getException)
+            else if (result["result"].ToString() != "success" && getException)
                 throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
             return false;
+        }
+
+        /// <summary>
+        /// Runs a change password action for a given service.
+        /// </summary>
+        /// <param name="ServiceID">The service ID to run the action for</param>
+        /// <param name="NewPassword">A new password to assign to the service</param>
+        /// <param name="getException">Default: true</param>
+        public async Task ModuleChangePasswordAsync(int ServiceID, string NewPassword, bool getException = true)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", EnumUtil.GetString(APIEnums.Actions.ModuleChangePassword) },
+                { EnumUtil.GetString(APIEnums.ModuleChangePasswordParams.ServiceID), ServiceID.ToString() },
+                { EnumUtil.GetString(APIEnums.ModuleChangePasswordParams.NewPassword), NewPassword }
+            };
+
+            JObject result = JObject.Parse(await _call.MakeCallAsync(data));
+
+            if (result["result"].ToString() != "success" && getException)
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
         }
 
         /// <summary>
