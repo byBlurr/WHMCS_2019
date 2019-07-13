@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WHMCS
 {
@@ -48,6 +49,23 @@ namespace WHMCS
             try
             {
                 webResponse = new WebClient().UploadValues(Url, BuildRequestData(data));
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to connect to WHMCS API. " + ex.Message.ToString());
+            }
+
+            return Encoding.ASCII.GetString(webResponse);
+        }
+
+        public async Task<string> MakeCallAsync(NameValueCollection data)
+        {
+            byte[] webResponse;
+
+            try
+            {
+                webResponse = await new WebClient().UploadValuesTaskAsync(Url, data);
 
             }
             catch (Exception ex)
