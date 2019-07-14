@@ -1,6 +1,3 @@
-# WHMCS_2019
-WHMCS_2019 is an updated version of [WHMCS_API by PedroCavaleiro.](https://github.com/PedroCavaleiro/whmcs-api)
-
 ## Contents
 * [Overview](#overview)
 * [Supported Functions](#supported-functions)
@@ -10,19 +7,21 @@ WHMCS_2019 is an updated version of [WHMCS_API by PedroCavaleiro.](https://githu
 
 ---------------------------------------------------------------------------------------
 ## Overview
-This is an library to comunicate with the WHMCS API.
+WHMCS_2019 is a C# API Wrapper for the WHMCS API. WHMCS_2019 is the updated version of [WHMCS_API by PedroCavaleiro.](https://github.com/PedroCavaleiro/whmcs-api), which has not been updated since 2017. I am looking to add all API calls available for WHMCS.
+
+The latest version of WHMCS_2019 is 0.1.3, released 13th July 2019.
 
 ## Supported Functions
-A guide of all supported functions will be available once the package is published.
+* [View all supported functions here](https://github.com/byBlurr/WHMCS_2019/wiki)
+* [Guide on how to write your own functions here](https://github.com/byBlurr/WHMCS_2019/wiki/Unsupported-Uses)
 
 ## Installation
-A guide on installing will be available once the package is published.
+[A guide for installing and getting started with WHMCS_2019](https://github.com/byBlurr/WHMCS_2019/wiki/Text-Tutorial)
 
 ## Contribution
-You can fork this project and create pull requests. Please follow the same code presentation and comment everything you do.
-Comments aren't just for us, but also for the developers using the API.
+You can contribute towards the project by forking this repo and creating pull requests. Before contributing to WHMCS_2019, please read the code already implemented. We expect you to follow the same standards.
 
 ## Unsupported Uses
 You are able to make your own API calls, however this is not supported. Any opened issues regarding unsupported uses will be closed.
 Feel free to request new features instead of making your own api calls. It is not recommended.
-[Unsupported Call Example](Will link to the wiki once created)
+[Unsupported Uses](https://github.com/byBlurr/WHMCS_2019/wiki/Unsupported-Uses)
