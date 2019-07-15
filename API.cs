@@ -726,6 +726,7 @@ namespace WHMCS
         /// <param name="NewPassword">A new password to assign to the service</param>
         /// <param name="getException">Default: true</param>
         /// <returns>If the password was changed Bool</returns>
+        [Obsolete("ModuleChangePassword() will become Obsolete in v0.1.5, please use ChangeServicePassword().")]
         public bool ModuleChangePassword(int ServiceID, string NewPassword, bool getException = true)
         {
             NameValueCollection data = new NameValueCollection()
@@ -750,6 +751,7 @@ namespace WHMCS
         /// <param name="ServiceID">The service ID to run the action for</param>
         /// <param name="NewPassword">A new password to assign to the service</param>
         /// <param name="getException">Default: true</param>
+        [Obsolete("ModuleChangePasswordAsync() will become Obsolete in v0.1.5, please use ChangeServicePasswordAsync().")]
         public async Task ModuleChangePasswordAsync(int ServiceID, string NewPassword, bool getException = true)
         {
             NameValueCollection data = new NameValueCollection()
@@ -766,12 +768,57 @@ namespace WHMCS
         }
 
         /// <summary>
+        /// Runs a change password action for a given service.
+        /// </summary>
+        /// <param name="ServiceID">The service ID to run the action for</param>
+        /// <param name="NewPassword">A new password to assign to the service</param>
+        /// <returns>Returns true if it was successful</returns>
+        public bool ChangeServicePassword(int ServiceID, string NewPassword)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", EnumUtil.GetString(APIEnums.Actions.ModuleChangePassword) },
+                { EnumUtil.GetString(APIEnums.ModuleChangePasswordParams.ServiceID), ServiceID.ToString() },
+                { EnumUtil.GetString(APIEnums.ModuleChangePasswordParams.NewPassword), NewPassword }
+            };
+
+            JObject result = JObject.Parse(_call.MakeCall(data));
+
+            if (result["result"].ToString() == "success")
+                return true;
+            else if (result["result"].ToString() != "success")
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+            return false;
+        }
+
+        /// <summary>
+        /// Runs a change password action for a given service.
+        /// </summary>
+        /// <param name="ServiceID">The service ID to run the action for</param>
+        /// <param name="NewPassword">A new password to assign to the service</param>
+        public async Task ChangeServicePasswordAsync(int ServiceID, string NewPassword)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", EnumUtil.GetString(APIEnums.Actions.ModuleChangePassword) },
+                { EnumUtil.GetString(APIEnums.ModuleChangePasswordParams.ServiceID), ServiceID.ToString() },
+                { EnumUtil.GetString(APIEnums.ModuleChangePasswordParams.NewPassword), NewPassword }
+            };
+
+            JObject result = JObject.Parse(await _call.MakeCallAsync(data));
+
+            if (result["result"].ToString() != "success")
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
+
+        /// <summary>
         /// Runs a custom module action for a given service.
         /// </summary>
         /// <param name="ServiceID">The service ID to run the action for</param>
         /// <param name="Command">The name of the custom function to run</param>
         /// <param name="getException"></param>
         /// <returns>If the command was successful Bool</returns>
+        [Obsolete("ModuleCustomCommand() will become Obsolete in v0.1.5, please use UseCustomCommand().")]
         public bool ModuleCustomCommand(int ServiceID, string Command, bool getException = true)
         {
             NameValueCollection data = new NameValueCollection()
@@ -796,7 +843,53 @@ namespace WHMCS
         /// <param name="ServiceID">The service ID to run the action for</param>
         /// <param name="Command">The name of the custom function to run</param>
         /// <param name="getException"></param>
+        [Obsolete("ModuleCustomCommandAsync() will become Obsolete in v0.1.5, please use UseCustomCommandAsync().")]
         public async Task ModuleCustomCommandAsync(int ServiceID, string Command)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", EnumUtil.GetString(APIEnums.Actions.ModuleCustomCommand) },
+                { EnumUtil.GetString(APIEnums.ModuleCustomCommandParams.ServiceID), ServiceID.ToString() },
+                { EnumUtil.GetString(APIEnums.ModuleCustomCommandParams.Command), Command }
+            };
+
+            JObject result = JObject.Parse(await _call.MakeCallAsync(data));
+
+            if (result["result"].ToString() != "success")
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+        }
+
+        /// <summary>
+        /// Runs a custom module action for a given service.
+        /// </summary>
+        /// <param name="ServiceID">The service ID to run the action for</param>
+        /// <param name="Command">The name of the custom function to run</param>
+        /// <param name="getException"></param>
+        /// <returns>Returns true if successful</returns>
+        public bool UseCustomCommand(int ServiceID, string Command)
+        {
+            NameValueCollection data = new NameValueCollection()
+            {
+                { "action", EnumUtil.GetString(APIEnums.Actions.ModuleCustomCommand) },
+                { EnumUtil.GetString(APIEnums.ModuleCustomCommandParams.ServiceID), ServiceID.ToString() },
+                { EnumUtil.GetString(APIEnums.ModuleCustomCommandParams.Command), Command }
+            };
+
+            JObject result = JObject.Parse(_call.MakeCall(data));
+
+            if (result["result"].ToString() == "success")
+                return true;
+            else if (result["result"].ToString() != "success")
+                throw new Exception("An API Error Ocurred", new Exception(result["message"].ToString()));
+            return false;
+        }
+
+        /// <summary>
+        /// Runs a custom module action for a given service.
+        /// </summary>
+        /// <param name="ServiceID">The service ID to run the action for</param>
+        /// <param name="Command">The name of the custom function to run</param>
+        public async Task UseCustomCommandAsync(int ServiceID, string Command)
         {
             NameValueCollection data = new NameValueCollection()
             {
