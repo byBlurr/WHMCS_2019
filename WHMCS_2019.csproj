@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	  <PackageId>WHMCS_2019</PackageId>
-	  <Version>0.1.3</Version>
+	  <Version>0.1.4</Version>
 	  <Authors>Daniel Dumont</Authors>
 	  <Company>blurrdev</Company>
-    <Description>WHMCS API wrapper for C#.</Description>
-    <PackageTags>whmcs;WHMCS;api;wrapper</PackageTags>
+    <Description>Simple and easy to use C# .net wrapper for the WHMCS API.</Description>
+    <PackageTags>whmcs;WHMCS;api;wrapper;dotnet;.net</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
