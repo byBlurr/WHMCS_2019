@@ -3,10 +3,37 @@ using System.Collections.Generic;
 
 namespace WHMCS.Clients
 {
-    public class Clients
+    public class AClient
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("firstname")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("lastname")]
+        public string LastName { get; set; }
+
+        [JsonProperty("companyname")]
+        public string CompanyName { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
+        [JsonProperty("datecreated")]
+        public string DateCreated { get; set; }
+
+        [JsonProperty("groupid")]
+        public int GroupId { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
+    }
+
+    public class AllClients
     {
         [JsonProperty("client")]
-        public IList<Client> Client { get; set; }
+        public IList<AClient> Clients { get; set; }
     }
 
     public class ClientsInfo
@@ -24,6 +51,6 @@ namespace WHMCS.Clients
         public int NumReturned { get; set; }
 
         [JsonProperty("clients")]
-        public Clients Clients { get; set; }
+        public AllClients Clients { get; set; }
     }
 }
